@@ -9,6 +9,7 @@
 namespace app\admin\service;
 
 use app\admin\model\Menu;
+use app\admin\model\Option;
 use app\admin\model\Setting;
 use app\lib\exception\MissException;
 use think\Cache;
@@ -95,6 +96,32 @@ class CacheList
             return $settingConfig->toArray();
         });
         return changeArr($SettingConfig,$key);
+    }
+
+    public static function getOptionConfig($key){
+        //以.作为分割
+        $key_arr = explode('.',$key);
+
+        $optionConfig = Cache::get($key[0]);
+        if(!$optionConfig){//不存在则读取数据库
+            $_optionCofig = Option::getOption($key_arr[0]);
+
+            $optionConfig = $_optionCofig['option_value'];
+            //存入缓存
+            Cache::set('Option_'.$key_arr[0],$optionConfig);
+        }
+
+        if(!is_array($optionConfig))
+        {
+            $optionConfig = json_decode($optionConfig, true);
+        }
+
+        $num = count($key_arr);
+        for($i=1;$i<$num;$i++){
+            $optionConfig = $optionConfig[$key_arr[$i]];
+        }
+
+        return $optionConfig;
     }
 
 

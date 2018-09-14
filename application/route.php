@@ -11,8 +11,13 @@
 
 use think\Route;
 
+//测试文件
+Route::get('/','admin/Test/index');
+
+
 //login
-Route::post('admin/:version/login','admin/:version.Login/login');
+Route::get('admin/login','admin/Login/index');
+Route::post('admin/login','admin/Login/login');
 //Setting
 Route::get('admin/:version/lgimg','admin/:version.Login/getLoginImages');
 

@@ -7,6 +7,7 @@ use app\admin\model\Setting;
 class Login extends Controller{
 
 
+
     public function login($username,$password){
         //验证用户传入数据
         (new Admin())->goCheck();
@@ -16,6 +17,7 @@ class Login extends Controller{
     }
 
 
+    //获取登录背景图片
     public function getLoginImages(){
         $url = Setting::getLoginImg();
         return $url;

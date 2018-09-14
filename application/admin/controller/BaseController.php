@@ -12,7 +12,6 @@ namespace app\admin\controller;
 use app\admin\service\Auth;
 use app\admin\service\Token;
 use app\lib\exception\ParameterException;
-use app\lib\exception\UnauthException;
 use think\Controller;
 use think\Request;
 
