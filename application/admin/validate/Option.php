@@ -20,11 +20,16 @@ class Option extends BaseValidate
         'tokenSalt'=>'require|alphaNum',
         'time_expire'=>'require|number',
         'time_last'=>'require|number|<:time_expire',
-        'status'=>'require|number'
+        'status'=>'require|number',
+
+        'img_id'=>'require',
+
+
     ];
 
     protected $scene =[
         'token'=>['tokenSalt','time_expire','time_last','status'],
+        'login'=>['img_id','time_expire'],
     ];
 
 

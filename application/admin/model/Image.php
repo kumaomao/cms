@@ -16,6 +16,7 @@ class Image extends BaseModel
     }
 
     public static function getImageById($id){
-
+        $imgInfo = self::where('id','in',$id)->select();
+        return $imgInfo;
     }
 }

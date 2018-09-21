@@ -1,5 +1,6 @@
 <?php
 namespace app\admin\controller\v1;
+use app\admin\model\Image as ImageModel;
 use app\admin\validate\Admin;
 use think\Controller;
 use app\admin\service\Login as LoginService;
@@ -19,7 +20,9 @@ class Login extends Controller{
 
     //获取登录背景图片
     public function getLoginImages(){
-        $url = Setting::getLoginImg();
-        return $url;
+       //获取图片id
+        $login = get_option('login');
+        $bg = ImageModel::getImageById($login['img_id']);
+        
     }
 }
