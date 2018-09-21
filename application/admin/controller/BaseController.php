@@ -22,13 +22,13 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->uid = Token::checkToken();
-        if(is_array($this->uid)){
-            $this->token = $this->uid['token'];
-            $this->uid = $this->uid['id'];
-
-        }
-        $this->chackAuth($this->uid);
+//        $this->uid = Token::checkToken();
+//        if(is_array($this->uid)){
+//            $this->token = $this->uid['token'];
+//            $this->uid = $this->uid['id'];
+//
+//        }
+//        $this->chackAuth($this->uid);
     }
 
 

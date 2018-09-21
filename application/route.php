@@ -15,6 +15,10 @@ use think\Route;
 Route::get('/','admin/Test/index');
 
 
+//Option
+Route::post('admin/:version/option/token','admin/:version.Option/setTokenOption');
+
+
 //login
 Route::get('admin/login','admin/Login/index');
 Route::post('admin/login','admin/Login/login');
@@ -24,10 +28,10 @@ Route::get('admin/:version/lgimg','admin/:version.Login/getLoginImages');
 //test
 Route::get('admin/:version/test','admin/:version.Test/test');
 
-//路由注册
-$route = \app\admin\service\CacheList::getRouteConfig();
-foreach ($route as $k=>$v){
-    if(!empty($v)){
-        Route::rule($v['route'],$v['name'],$v['method']);
-    }
-}
+////路由注册
+//$route = \app\admin\service\CacheList::getRouteConfig();
+//foreach ($route as $k=>$v){
+//    if(!empty($v)){
+//        Route::rule($v['route'],$v['name'],$v['method']);
+//    }
+//}

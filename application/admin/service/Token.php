@@ -25,7 +25,7 @@ class Token
     private static function generateToken()
     {
         //获取关键字
-        $tokenSalt = CacheList::getTokenConfig('tokenSalt');
+        $tokenSalt =get_option('token.tokenSalt');
         $randChar = self::getRandChar(32);
         //获取请求提交时间
         $timestamp = $_SERVER['REQUEST_TIME_FLOAT'];
@@ -60,7 +60,7 @@ class Token
      * @throws UnauthException
      */
     public static function checkToken(){
-        $status =CacheList::getTokenConfig('status');
+        $status =get_option('token.status');
         //判断验证模式
         if($status){
             $uid = self::getDataByToken('id');
@@ -69,7 +69,7 @@ class Token
         //token自动刷新
         //保存的到期时间
         $time_expire = self::getDataByToken('time_expire');
-        $time_last =CacheList::getTokenConfig('time_last');
+        $time_last =get_option('token.time_last');
         if(time()>$time_expire){
             throw new UnauthException([
                 'msg'=>'身份不合法',
@@ -96,8 +96,8 @@ class Token
      */
     public static  function setCacheByToken($value){
         $token = self::generateToken();
-        $time_expire =CacheList::getTokenConfig('time_expire');
-        $status = CacheList::getTokenConfig('status');
+        $time_expire =get_option('token.time_expire');
+        $status = get_option('token.status');
         //判断写入模式 0自动更新，1不自动更新
         if($status){
             $result = Cache::set($token,$value,$time_expire);

@@ -33,7 +33,7 @@ class Option extends BaseModel
             }
             $_option['option_value'] = json_encode($data);
             $result =  self::where('option_name','=',$key)->update($_option);
-            return $result;
+            return  $_option['option_value'];
         }
         //不存在则写入
         $_option=[
