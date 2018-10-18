@@ -23,6 +23,8 @@ class Login extends Controller{
        //获取图片id
         $login = get_option('login');
         $bg = ImageModel::getImageById($login['img_id']);
-        
+
     }
+
+
 }
