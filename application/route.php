@@ -28,9 +28,9 @@ Route::get('admin/:version/lgimg','admin/:version.Login/getLoginImages');
 Route::get('admin/:version/test','admin/:version.Test/test');
 
 ////路由注册
-//$route = \app\admin\service\CacheList::getRouteConfig();
-//foreach ($route as $k=>$v){
-//    if(!empty($v)){
-//        Route::rule($v['route'],$v['name'],$v['method']);
-//    }
-//}
+$route = \app\admin\service\CacheList::getRouteConfig();
+foreach ($route as $k=>$v){
+    if(!empty($v)){
+        Route::rule($v['route'],$v['name'],$v['method']);
+    }
+}

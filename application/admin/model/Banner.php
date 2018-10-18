@@ -16,6 +16,14 @@ class Banner extends BaseModel
         return $this->hasMany('BannerItem','banner_id','id');
     }
 
+    public function getCreateTimeAttr($value){
+        return $this->changeDate($value);
+    }
+
+    public function getUpdateTimeAttr($value){
+        return $this->changeDate($value);
+    }
+
     /**
      * 获取banner
      * @param $id
@@ -27,6 +35,16 @@ class Banner extends BaseModel
     public static function getBanner(){
         $banner = self::with(['item','item.img'])->find();
         return $banner;
+    }
+
+    public static function getBanners($page,$limit){
+        $banner = self::page($page,$limit)->select();
+        return $banner;
+    }
+
+    public static function addBanner($data){
+        $result = self::create($data);
+        return $result;
     }
 
 

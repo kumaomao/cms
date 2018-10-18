@@ -17,4 +17,10 @@ class BaseModel extends Model{
         }
         return $imageUrl;
     }
+
+    //转换时间戳为时间
+    protected function changeDate($value){
+        $date = date("Y-m-d H:i:s",$value);
+        return $date;
+    }
 }

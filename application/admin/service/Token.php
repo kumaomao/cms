@@ -18,6 +18,15 @@ use think\Request;
  */
 class Token
 {
+
+    private static function getToken(){
+        $token = Request::instance()->header('token');
+        if(!$token){
+           $token =  Request::instance()->param('token');
+        }
+        return $token;
+    }
+
     /**
      * 生成token
      * @return string
@@ -40,7 +49,7 @@ class Token
      * @throws UnauthException
      */
     public static function getDataByToken($key){
-        $token = Request::instance()->header('token');
+        $token = self::getToken();
         $vars = Cache::get($token);
 
         if($vars){
@@ -78,7 +87,7 @@ class Token
         }
         //产生新的token并储存
         if($time_expire - time() < $time_last ){
-            $old_token = Request::instance()->header('token');
+            $old_token = self::getToken();
             $value = Cache::get($old_token);
             //删除过期缓存
             Cache::rm($old_token);

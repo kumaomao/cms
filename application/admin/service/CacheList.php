@@ -42,24 +42,24 @@ class CacheList
 //        return changeArr($tokenConfig,$key);
 //    }
 //
-//    /**
-//     *路由配置
-//     * @return mixed
-//     */
-//    public static function getRouteConfig(){
-//        $routeConfig = Cache::remember('routeConfig',function(){
-//            $auth = new Auth();
-//            $routeConfig = $auth->getRoute();
-//            if($routeConfig->isEmpty()){
-//                throw new MissException([
-//                    'msg'=>'路由配置不存在',
-//                    'errorCode'=>40004
-//                ]);
-//            }
-//            return $routeConfig->toArray();
-//        });
-//        return changeArr($routeConfig);
-//    }
+    /**
+     *路由配置
+     * @return mixed
+     */
+    public static function getRouteConfig(){
+        $routeConfig = Cache::remember('routeConfig',function(){
+            $auth = new Auth();
+            $routeConfig = $auth->getRoute();
+            if($routeConfig->isEmpty()){
+                throw new MissException([
+                    'msg'=>'路由配置不存在',
+                    'errorCode'=>40004
+                ]);
+            }
+            return $routeConfig->toArray();
+        });
+        return changeArr($routeConfig);
+    }
 //
 //    /**
 //     * 菜单缓存

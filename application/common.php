@@ -37,5 +37,15 @@ function get_option($key){
     return \app\admin\service\CacheList::getOptionConfig($key);
 }
 
+//将连表查询数据格式转换
+function changeDataToJion($data,$key,$value){
+    foreach($data as $k => $v){
+        $data[$k][$key] = $data[$k][$key][$value];
+
+    }
+    return $data;
+
+}
+
 
 
