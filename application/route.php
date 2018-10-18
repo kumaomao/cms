@@ -20,8 +20,7 @@ Route::post('admin/:version/option/token','admin/:version.Option/setTokenOption'
 
 
 //login
-Route::get('admin/login','admin/Login/index');
-Route::post('admin/login','admin/Login/login');
+Route::post('admin/:version/login','admin/:version.Login/login');
 //Setting
 Route::get('admin/:version/lgimg','admin/:version.Login/getLoginImages');
 
