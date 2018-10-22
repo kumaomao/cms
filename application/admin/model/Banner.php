@@ -47,5 +47,10 @@ class Banner extends BaseModel
         return $result;
     }
 
+    public static function delBanner($id){
+        $result = self::destroy($id);
+        return $result;
+    }
+
 
 }

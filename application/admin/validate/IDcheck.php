@@ -12,8 +12,29 @@ namespace app\admin\validate;
 class IDcheck extends BaseValidate
 {
     protected $rule=[
-        'id'=>'require|number|gt:0',
+        'id'=>'require|checkIDs',
     ];
+
+    protected function checkIDs($value)
+    {
+
+        $values = explode(',', $value);
+        if (empty($values)) {
+            if ($this->isPositiveInteger($value)) {
+                // 必须是正整数
+                return true;
+            }
+            return false;
+        }
+        foreach ($values as $id) {
+            if (!$this->isPositiveInteger($id)) {
+                // 必须是正整数
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
 }

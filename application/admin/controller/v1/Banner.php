@@ -28,7 +28,13 @@ class Banner extends BaseController {
         return $this->returnJson(['code'=>0,'data'=>$banner]);
     }
 
-    //获取banner位置
+    /**
+     * 获取banner位置
+     * @param $page 页数
+     * @param $limit 每页数量
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function getBanners($page,$limit){
         $validate = new Limit();
         $validate->goCheck();
@@ -36,6 +42,14 @@ class Banner extends BaseController {
         return $this->returnJson(['code'=>0,'count'=>count($banner),'data'=>$banner]);
     }
 
+    /**
+     * 获取banner下图片
+     * @param $id banner_id
+     * @param $page 页数
+     * @param $limit 每页数量
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function getBannerItem($id,$page,$limit){
         $validate = new IDcheck();
         $validate->goCheck();
@@ -46,12 +60,29 @@ class Banner extends BaseController {
         return $this->returnJson(['code'=>0,'count'=>count($bannerItem),'data'=>$bannerItem]);
     }
 
-
+    /**
+     * 添加banner位置
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function addBanner(){
         $validate = new BannerValidate();
         $validate->scene('banner')->goCheck();
         $data = $validate->getDataByRule(input('post.'),'banner');
         $result = BannerModel::addBanner($data);
         return $this->returnJson(['msg'=>'添加成功']);
+    }
+
+
+    /**
+     * 删除banner
+     * @param $id
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function delBanner($id){
+        (new IDcheck())->goCheck();
+        $result = BannerModel::delBanner($id);
+        return $result?$this->returnJson(['code'=>200,'msg'=>'删除成功']):$this->returnJson(['code'=>0,'msg'=>'该位置下存在图片，无法删除']);
     }
 }

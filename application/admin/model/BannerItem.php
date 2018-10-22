@@ -16,7 +16,7 @@ class BannerItem extends BaseModel
     }
 
 
-    public static function getBannerItem($id,$page,$limit){
+    public static function getBannerItem($id,$page=1,$limit=10){
         $info = self::with(['img'])
             ->where('banner_id','=',$id)
             ->page($page,$limit)
