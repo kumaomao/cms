@@ -40,8 +40,9 @@ function get_option($key){
 //将连表查询数据格式转换
 function changeDataToJion($data,$key,$value){
     foreach($data as $k => $v){
-        $data[$k][$key] = $data[$k][$key][$value];
-
+        $url = $v[$key][$value];
+        unset($data[$k][$key]);
+        $data[$k][$key] = $url;
     }
     return $data;
 

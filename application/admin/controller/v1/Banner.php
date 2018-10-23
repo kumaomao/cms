@@ -9,6 +9,7 @@ use app\admin\validate\IDcheck;
 use app\admin\model\BannerItem as BannerItemModel;
 use app\admin\validate\Limit;
 use app\admin\validate\Banner as BannerValidate;
+use app\admin\service\Banner as BannerService;
 
 class Banner extends BaseController {
     /**
@@ -69,8 +70,15 @@ class Banner extends BaseController {
         $validate = new BannerValidate();
         $validate->scene('banner')->goCheck();
         $data = $validate->getDataByRule(input('post.'),'banner');
-        $result = BannerModel::addBanner($data);
-        return $this->returnJson(['msg'=>'添加成功']);
+        if($data['id']==0){
+            $result = BannerModel::addBanner($data);
+        }else{
+            $id = $data['id'];
+            unset($data['id']);
+            $result = BannerModel::editBanner($data,$id);
+        }
+
+        return $this->returnJson(['msg'=>'操作成功']);
     }
 
 
@@ -82,7 +90,7 @@ class Banner extends BaseController {
      */
     public function delBanner($id){
         (new IDcheck())->goCheck();
-        $result = BannerModel::delBanner($id);
-        return $result?$this->returnJson(['code'=>200,'msg'=>'删除成功']):$this->returnJson(['code'=>0,'msg'=>'该位置下存在图片，无法删除']);
+        $result = BannerService::delBanner($id);
+        return $this->returnJson($result);
     }
 }

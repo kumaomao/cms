@@ -12,11 +12,12 @@ namespace app\admin\validate;
 class Banner extends BaseValidate
 {
     protected $rule=[
+        'id'=>'require',
         'name'=>'require',
         'description'=>'require',
     ];
 
     protected $scene = [
-        'banner'=>['name','description']
+        'banner'=>['id','name','description']
     ];
 }

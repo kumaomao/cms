@@ -39,11 +39,12 @@ class Banner
         $_id = false;
         foreach ($id as $k=>$v){
             $info = BannerItem::getBannerItem($v);
-            if($info->isEmpty()){
+            if(!$info->isEmpty()){
                 $_id = $v;
                 break;
             }
         }
+
         return $_id;
     }
 
