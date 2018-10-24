@@ -89,6 +89,9 @@ class Banner extends BaseController {
             $result = BannerItemModel::addBannerItem($data);
         }else{
             $id = $data['id'];
+            if($data['img_id']==0){
+                unset($data['img_id']);
+            }
             unset($data['id']);
             $result = BannerItemModel::editBannerItem($data,$id);
         }
@@ -113,6 +116,6 @@ class Banner extends BaseController {
         (new IDcheck())->goCheck();
         $ids = BannerService::changeIds($id);
         $result = BannerItemModel::delBannerItem($ids);
-        return $this->returnJson($result);
+        return $this->returnJson(['code'=>200,'msg'=>'操作成功']);
     }
 }
