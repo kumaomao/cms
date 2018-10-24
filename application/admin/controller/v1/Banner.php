@@ -81,6 +81,21 @@ class Banner extends BaseController {
         return $this->returnJson(['msg'=>'操作成功']);
     }
 
+    public function addBannerItem(){
+        $validate = new BannerValidate();
+        $validate->scene('bannerItem')->goCheck();
+        $data = $validate->getDataByRule(input('post.'),'bannerItem');
+        if($data['id']==0){
+            $result = BannerItemModel::addBannerItem($data);
+        }else{
+            $id = $data['id'];
+            unset($data['id']);
+            $result = BannerItemModel::editBannerItem($data,$id);
+        }
+
+        return $this->returnJson(['msg'=>'操作成功']);
+    }
+
 
     /**
      * 删除banner
@@ -91,6 +106,13 @@ class Banner extends BaseController {
     public function delBanner($id){
         (new IDcheck())->goCheck();
         $result = BannerService::delBanner($id);
+        return $this->returnJson($result);
+    }
+
+    public function delBannerItem($id){
+        (new IDcheck())->goCheck();
+        $ids = BannerService::changeIds($id);
+        $result = BannerItemModel::delBannerItem($ids);
         return $this->returnJson($result);
     }
 }

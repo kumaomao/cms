@@ -15,9 +15,14 @@ class Banner extends BaseValidate
         'id'=>'require',
         'name'=>'require',
         'description'=>'require',
+        'img_id'=>'require|number',
+        'key_word'=>'require',
+        'url'=>'require',
+        'banner_id'=>'require|number'
     ];
 
     protected $scene = [
-        'banner'=>['id','name','description']
+        'banner'=>['id','name','description'],
+        'bannerItem'=>['id','img_id','key_word','url','banner_id']
     ];
 }

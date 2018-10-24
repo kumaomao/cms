@@ -19,4 +19,9 @@ class Image extends BaseModel
         $imgInfo = self::where('id','in',$id)->select();
         return $imgInfo;
     }
+
+    public static function setImage($data){
+       $result =  self::create($data);
+        return $result->id;
+    }
 }

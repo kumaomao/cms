@@ -41,7 +41,7 @@ class Option extends BaseModel
             'option_value'=>json_encode($data)
         ];
         $result = self::create($_option);
-        return $result;
+        return $_option['option_value'];
     }
 
     //读取数据

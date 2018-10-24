@@ -23,4 +23,19 @@ class BannerItem extends BaseModel
             ->select();
         return $info;
     }
+
+    public static function addBannerItem($data){
+        $result = self::create($data);
+        return $result;
+    }
+
+    public static function editBannerItem($data,$id){
+        $result = self::where('id','=',$id)->update($data);
+        return $result;
+    }
+
+    public static function delBannerItem($id){
+        $result = self::destroy($id,true);
+        return $result;
+    }
 }

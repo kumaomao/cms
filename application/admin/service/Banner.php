@@ -16,6 +16,17 @@ class Banner
 {
 
     public static function delBanner($id){
+        $arr_id = self::changeIds($id);
+        $result = self::checkBannerIsHaveItem($arr_id);
+        if($result){
+            return ['code'=>0,'msg'=>'id:'.$result.'下存在图片，无法删除'];
+        }
+        BannerModel::delBanner($arr_id);
+        return ['code'=>200,'msg'=>'删除成功'];
+
+    }
+
+    public static function changeIds($id){
         //判断id是单id还是多id
         $values = explode(',', $id);
         $arr_id = [];
@@ -25,13 +36,7 @@ class Banner
         }else{
             $arr_id = $values;
         }
-        $result = self::checkBannerIsHaveItem($arr_id);
-        if($result){
-            return ['code'=>0,'msg'=>'id:'.$result.'下存在图片，无法删除'];
-        }
-        BannerModel::delBanner($arr_id);
-        return ['code'=>200,'msg'=>'删除成功'];
-
+        return $arr_id;
     }
 
 
