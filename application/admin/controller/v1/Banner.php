@@ -70,14 +70,14 @@ class Banner extends BaseController {
         $validate = new BannerValidate();
         $validate->scene('banner')->goCheck();
         $data = $validate->getDataByRule(input('post.'),'banner');
-        if($data['id']==0){
-            $result = BannerModel::addBanner($data);
-        }else{
-            $id = $data['id'];
-            unset($data['id']);
-            $result = BannerModel::editBanner($data,$id);
-        }
-
+//        if($data['id']==0){
+//
+//        }else{
+//            $id = $data['id'];
+//            unset($data['id']);
+//            $result = BannerModel::editBanner($data,$id);
+//        }
+        $result = BannerModel::addBanner($data);
         return $this->returnJson(['msg'=>'操作成功']);
     }
 
@@ -116,6 +116,6 @@ class Banner extends BaseController {
         (new IDcheck())->goCheck();
         $ids = BannerService::changeIds($id);
         $result = BannerItemModel::delBannerItem($ids);
-        return $this->returnJson(['code'=>200,'msg'=>'操作成功']);
+        return $this->returnJson(['code'=>0,'msg'=>'操作成功']);
     }
 }

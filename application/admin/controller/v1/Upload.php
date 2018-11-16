@@ -20,6 +20,11 @@ class Upload extends BaseController
 {
 
 
+    /**
+     * 上传接口
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function upload(){
         $result = UploadService::upload();
         return $this->returnJson($result);

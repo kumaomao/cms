@@ -47,10 +47,10 @@ class Banner extends BaseModel
         return $result;
     }
 
-    public static function editBanner($data,$id){
-        $result = self::where('id','=',$id)->update($data);
-        return $result;
-    }
+//    public static function editBanner($data,$id){
+//        $result = self::where('id','=',$id)->update($data);
+//        return $result;
+//    }
 
     public static function delBanner($id){
         $result = self::destroy($id);

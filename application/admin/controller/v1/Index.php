@@ -1,18 +1,13 @@
 <?php
-namespace app\admin\controller;
-use app\admin\model\AdminList as Admin;
-use think\Request;
-use token\Token;
-use think\Cache;
-class Index extends Base{
+namespace app\admin\controller\v1;
+use app\admin\controller\BaseController;
+
+class Index extends BaseController {
 
 
     public function index(){
 
     }
-
-
-
 
 
 

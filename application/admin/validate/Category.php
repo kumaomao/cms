@@ -12,4 +12,14 @@ namespace app\admin\validate;
 class Category extends BaseValidate
 {
 
+    protected $rule = [
+        'id'=>'require|checkIDs',
+        'pid'=>'require|checkIDs',
+        'order'=>'require|number',
+        'name'=>'require',
+        'description'=>'require',
+        'seo_title'=>'require',
+        'seo_keywords'=>'require',
+        'seo_description'=>'require',
+    ];
 }
