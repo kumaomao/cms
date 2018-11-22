@@ -38,10 +38,12 @@ class Login
         unset($adminInfo['password']);
         //写入缓存
 
-        $token =Token::setCacheByToken($adminInfo->toArray());
+        //过滤需要的字段
+        $adminInfo = $adminInfo->visible(['id','username','nickname','img.details','img.url','create_time'])->toArray();
+        $token =Token::setCacheByToken($adminInfo);
         //写入操作log
         $log=AdminLog::setLog($adminInfo['id'],$adminInfo['username'],'管理员:'.$adminInfo['username'].'登陆了后台');
-        return ['token'=>$token,'userInfo'=>$adminInfo->toArray()];
+        return ['token'=>$token,'userInfo'=>$adminInfo];
     }
 
 }

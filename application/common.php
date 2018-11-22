@@ -26,6 +26,7 @@ function changeArr($data,$key='_all'){
     if (array_key_exists($key, $data)) {
         return $data[$key];
     }
+
     throw new \app\lib\exception\MissException([
         'msg'=>$key.'不存在',
         'errorCode'=>40003
@@ -37,16 +38,26 @@ function get_option($key){
     return \app\admin\service\CacheList::getOptionConfig($key);
 }
 
-//将连表查询数据格式转换
-function changeDataToJion($data,$key,$value){
+//将连表查询数据格式转换(一维数组)
+function changeDataToOneArr($data,$key=false){
+    static $newArr=[];
     foreach($data as $k => $v){
-        $url = $v[$key][$value];
-        unset($data[$k][$key]);
-        $data[$k][$key] = $url;
-    }
-    return $data;
+        $_k = $key?$key.'_'.$k:$k;
+        if(is_array($v)){//
+            changeDataToOneArr($data[$k],$_k);
+        }else{
+            $newArr[$_k]=$data[$k];
+        }
 
+    }
+    return $newArr;
 }
 
+function allChangeDataToOneArr($data){
+    foreach ($data as $k=>$v){
+        $data[$k]=changeDataToOneArr($v);
+    }
+    return $data;
+}
 
 

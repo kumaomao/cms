@@ -18,6 +18,13 @@ use app\admin\validate\Limit;
 class Article extends BaseController
 {
 
+    /**
+     * 获取所有文章
+     * @param $page
+     * @param $limit
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function getArticle($page,$limit){
         (new Limit())->goCheck();
         $article = ArticleModel::getArticle($page,$limit);
@@ -25,6 +32,11 @@ class Article extends BaseController
     }
 
 
+    /**
+     * 添加或修改文章
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function addArticle(){
         $validate = new ArticleValidate();
         $validate->goCheck();
@@ -33,6 +45,12 @@ class Article extends BaseController
         return $this->returnJson(['msg'=>'操作成功']);
     }
 
+    /**
+     * 删除文章
+     * @param $id
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     */
     public function delArticle($id){
         (new IDcheck())->goCheck();
         $result = ArticleModel::delArticle($id);

@@ -43,14 +43,16 @@ class Banner extends BaseModel
     }
 
     public static function addBanner($data){
-        $result = self::create($data);
+        if($data['id']){
+            $result = self::update($data);
+        }else{
+            $result = self::create($data);
+        }
+
         return $result;
     }
 
-//    public static function editBanner($data,$id){
-//        $result = self::where('id','=',$id)->update($data);
-//        return $result;
-//    }
+
 
     public static function delBanner($id){
         $result = self::destroy($id);

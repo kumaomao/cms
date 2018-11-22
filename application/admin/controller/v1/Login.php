@@ -14,7 +14,8 @@ class Login extends Controller{
         (new Admin())->goCheck();
         $login = new LoginService();
         $token = $login->Login($username,$password);
-        return json(['token'=>$token['token'],'msg'=>'登录成功','userInfo'=>$token['userInfo']]);
+        $userInfo=changeDataToOneArr($token['userInfo']);
+        return json(['token'=>$token['token'],'msg'=>'登录成功','userInfo'=>$userInfo]);
     }
 
 
