@@ -12,6 +12,6 @@ namespace app\lib\exception;
 class SuccessMessage extends BaseException
 {
     public $code = 201;
-    public $msg = 'ok';
+    public $msg = '操作成功';
     public $errorCode = 0;
 }

@@ -15,8 +15,7 @@ use think\Route;
 Route::get('/','admin/Test/index');
 
 
-//Option
-Route::post('admin/:version/option/token','admin/:version.Option/setTokenOption');
+
 
 
 //login

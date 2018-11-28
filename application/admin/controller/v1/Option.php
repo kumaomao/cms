@@ -10,6 +10,7 @@ namespace app\admin\controller\v1;
 
 
 use app\admin\controller\BaseController;
+use app\admin\service\CacheList;
 use app\admin\validate\Option as OptionValidate;
 use app\admin\model\Option as OptionModel;
 use app\lib\exception\SuccessMessage;
@@ -24,26 +25,17 @@ class Option extends BaseController
 {
 
 
-
     /**
-     * 设置token配置
-     * @throws SuccessMessage
-     * @throws \app\lib\exception\ParameterException
-     * @throws \think\Exception
+     * 获取网站配置
+     * @param $key
+     * @return \think\response\Json
      */
-    public function setTokenOption(){
-        $this->setOption('token');
+    public function getOption($key){
+        $option = CacheList::getOptionConfig($key);
+        return $this->returnJson(['data'=>$option]);
     }
 
-    /**
-     * 登录界面配置
-     * @throws SuccessMessage
-     * @throws \app\lib\exception\ParameterException
-     * @throws \think\Exception
-     */
-    public function setLoginOption(){
-        $this->setOption('login');
-    }
+
 
 
     /**
@@ -53,7 +45,8 @@ class Option extends BaseController
      * @throws \app\lib\exception\ParameterException
      * @throws \think\Exception
      */
-    private function setOption($key){
+    public function setOption(){
+        $key = input('key');
         $validate = new OptionValidate();
         $validate->scene($key)->goCheck();
         $data = $validate->getDataByRule(input('post.'),$key);
